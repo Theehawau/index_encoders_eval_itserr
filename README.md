@@ -1,4 +1,4 @@
-# Gretino: A Retrieval benchmark in Latin and Ancient Greek
+# Gretino: A Retrieval benchmark in Ancient Greek and Latin
 
 The dataset is available in `data/` one can use pandas to read it:
 
