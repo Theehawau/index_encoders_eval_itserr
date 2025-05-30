@@ -66,7 +66,7 @@ def main(argv):
         # Se non esiste, crea un nuovo indice
         index = faiss.IndexFlatL2(H.data.len_embedding)
         print("New index created.")
-    
+
 
     #create or open db
     path_to_save_db = os.path.join(H.db.db_path,f"{H.db.db_name}.db")
@@ -118,7 +118,7 @@ def main(argv):
     #         else:
     #             all_sentences.extend(random.sample(sentence_per_author, 250))
     #         num_current_folder += 1
-    
+
     # print(f"Total number of sentences: {len(all_sentences)}")
     # sentences = random.sample(all_sentences, 1000)
     # print(f"Number of sentences to index: {len(sentences)}")
@@ -133,23 +133,23 @@ def main(argv):
             sentences.append(line.strip())
 
     df = pd.read_csv(json_dataset_path, sep="\t", encoding="utf-8")
-    
-    targets = [f"Target #{i}" for i in range(1, 6)] 
+
+    targets = [f"Target #{i}" for i in range(1, 6)]
 
     for i, target in enumerate(targets):
          sentences.extend(df[target].values.tolist())
 
 
     print(f"Number of sentences to index: {len(sentences)}")
-    
-        
+
+
     #get encoding of each sentence
     sentence_embeddings = encode_sentences(sentences, model, tokenizer, H.data.len_embedding, device, H.model.model_max_length)
 
     #add embeddings to index
     faiss.normalize_L2(sentence_embeddings)
     index.add(sentence_embeddings)
-    
+
     #save data to db (NB: if FAISS USE INDEX K FOR A SENTENCE, SQLITE USE INDEX (K+1))
     for idx, sentence in enumerate(sentences):
         cursor.execute(f"""

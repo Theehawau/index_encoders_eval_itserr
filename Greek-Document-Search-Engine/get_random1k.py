@@ -11,7 +11,6 @@ from transformers import AutoTokenizer, AutoModelForMaskedLM, AutoModelForSeq2Se
 from sentence_transformers import SentenceTransformer
 import torch
 from transformers import pipeline
-import faiss
 import pandas as pd
 import sqlite3
 import random
@@ -23,7 +22,7 @@ def main(argv):
     H = FLAGS.config
 
     device = H.run.device if torch.cuda.is_available() else -1
-
+    os.makedirs("random_sentences", exist_ok=True)
     if H.model.type == "roberta":
         tokenizer = AutoTokenizer.from_pretrained(H.model.tokenizer)
         model = AutoModelForMaskedLM.from_pretrained(H.model.model).to(device)
@@ -43,10 +42,10 @@ def main(argv):
         model = AutoModelForSeq2SeqLM.from_pretrained(H.model.model).get_encoder().to(device)
 
     #path to json dataset
-    json_dataset_path = H.data.json_dataset_path    
+    json_dataset_path = H.data.json_dataset_path
 
 
-    num_current_folder = 1   
+    num_current_folder = 1
     all_sentences = []
     for folder_name in os.listdir(json_dataset_path):
         folder_path = os.path.join(json_dataset_path, folder_name)
@@ -83,14 +82,15 @@ def main(argv):
             else:
                 all_sentences.extend(random.sample(sentence_per_author, 250))
             num_current_folder += 1
-    
+
     print(f"Total number of sentences: {len(all_sentences)}")
     sentences = random.sample(all_sentences, 1000)
 
-    x = open("random_sentences.txt", "w")
-    for sentence in sentences:
-        x.write(sentence + "\n")
-    x.close()
+    for i in range(120):
+        x = open(f"random_sentences/random_sentences_{i}.txt", "w")
+        for sentence in sentences:
+            x.write(sentence + "\n")
+        x.close()
 
 
 if __name__ == '__main__':

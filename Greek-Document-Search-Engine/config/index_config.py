@@ -26,10 +26,10 @@ def get_config():
                     ...
                     - <...>.json
                 ...
-        
+
         So, json_dataset_path is the absolute path to 'dataset_name'
     '''
-    data.json_dataset_path = "/home/hawau/tlg"
+    data.json_dataset_path = "/home/gpucce/Repos/tutto_hawau/hawau/tlg"
     data.test_benchmark_path = "/home/hawau/Greek-Document-Search-Engine/data_parallel/Greek_benchmark.txt"
     data.save_index_output_dir = "data_parallel"
 

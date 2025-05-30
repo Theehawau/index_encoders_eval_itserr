@@ -91,15 +91,15 @@ if __name__ == "__main__":
 
     # Load the data
     df = pd.read_csv(data_path, sep="\t")
-    
+
     # Define the target and top_k columns
     targets = [f"Target #{i}" for i in range(1, 6)]
     top_k = [f"best #{i}" for i in range(0, args.top_k)]
     top_250 = [f"best #{i}" for i in range(0, 250)]
 
     df['target_match'] = df.apply(check_matches, axis=1)
-    print("-----------------------------------")
-    print("Index Model:", args.index_model)
+    # print("-----------------------------------")
+    # print("Index Model:", args.index_model)
     print("-----------------------------------")
 
     if args.model is not None:
