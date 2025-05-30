@@ -1,5 +1,13 @@
 # Gretino: A Retrieval benchmark in Ancient Greek and Latin
 
+To get started:
+```
+# Create a virtual environment using e.g. conda
+conda create -p conda_venv python=3.10
+# Install required pacakges
+pip install -r requirements.txt
+```
+
 The dataset is available in `data/` one can use pandas to read it:
 
 ```python
@@ -15,7 +23,7 @@ Each csv has a `Query` column and 5 target coluns `[f"Target #{i}" for i in rang
 
 ## Model Evaluation
 
-All the evaluation can be run in a notebook, `data_study.ipynb` and to replicate the tables in the paper with the nice formattting and colors one can run the `plots.ipynb` notebook after running the `data_study.ipynb`
+All the evaluation can be run in a notebook, `data_study.ipynb` and to replicate the tables in the paper with the nice formattting and colors one can run the `plots.ipynb` notebook after running `data_study.ipynb`.
 
 ## Fine Tuning
 
